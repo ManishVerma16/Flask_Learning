@@ -2,7 +2,7 @@ from datetime import datetime
 from flask import Flask, render_template, url_for, flash, redirect
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import defaultload
-from forms import RegistrationForm, LoginForm
+from flask_blog.forms import RegistrationForm, LoginForm # folder_name.file_name -> flask_blog.forms
 
 app = Flask(__name__)
 
