@@ -1,0 +1,8 @@
+>>> from flask_blog.flask_blog_template import db
+>>> db.create_all()
+>>> from flask_blog.flask_blog_template import User, Post    
+>>> user_1 = User(username='ishver', email='ish@email.com', password='ishver123')
+>>> db.session.add(user_1)
+>>> user_2 = User(username='test', email='test@email.com', password='test123')
+>>> db.session.add(user_2) 
+>>> 
