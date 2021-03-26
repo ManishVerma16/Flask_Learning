@@ -5,4 +5,30 @@
 >>> db.session.add(user_1)
 >>> user_2 = User(username='test', email='test@email.com', password='test123')
 >>> db.session.add(user_2) 
->>> 
+>>> db.session.commit()   
+>>> User.query.all()
+[User('ishver', 'ish@email.com', 'default.jpg'), User('test', 'test@email.com', 'default.jpg')]
+>>> User.query.first()
+User('ishver', 'ish@email.com', 'default.jpg')
+>>> User.query.filter_by(username='ishver').all()
+[User('ishver', 'ish@email.com', 'default.jpg')]
+>>> User.query.filter_by(username='ishver').first()
+User('ishver', 'ish@email.com', 'default.jpg')
+>>> user = User.query.filter_by(username='ishver').first() 
+>>> user
+User('ishver', 'ish@email.com', 'default.jpg')
+>>> user.id
+1
+>>> user.username
+'ishver'
+>>> user.email   
+'ish@email.com'
+>>> user.password
+'ishver123'
+>>> user.image_file
+'default.jpg'
+>>> User.query.get(1) 
+User('ishver', 'ish@email.com', 'default.jpg')
+>>> User.query.get(2) 
+User('test', 'test@email.com', 'default.jpg')
+>>>
