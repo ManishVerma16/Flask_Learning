@@ -31,4 +31,35 @@ User('ishver', 'ish@email.com', 'default.jpg')
 User('ishver', 'ish@email.com', 'default.jpg')
 >>> User.query.get(2) 
 User('test', 'test@email.com', 'default.jpg')
->>>
+
+>>> user.id
+1
+>>> post_1 = Post(title='Blog 1', content='First Post Content!', user_id=user.id)
+>>> post_2 = Post(title='Blog 2', content='Second Post Content!', user_id=user.id)
+>>> db.session.add(post_1)
+>>> db.session.add(post_2) 
+>>> db.session.commit()
+>>> user.posts
+[Post('Blog 1', '2021-03-27 18:02:50.253993'), Post('Blog 2', '2021-03-27 18:02:50.255989')]
+
+>>> for post in user.posts:
+...     print(post.title)
+...     print(post.user_id)
+... 
+Blog 1
+1
+Blog 2
+1
+
+>>> post = Post.query.first()
+>>> post
+Post('Blog 1', '2021-03-27 18:02:50.253993')
+>>> post = Post.query.all()  
+>>> post
+[Post('Blog 1', '2021-03-27 18:02:50.253993'), Post('Blog 2', '2021-03-27 18:02:50.255989')]
+
+>>> post = Post.query.first()
+>>> post.author
+User('ishver', 'ish@email.com', 'default.jpg')
+
+>>> db.drop_all()
