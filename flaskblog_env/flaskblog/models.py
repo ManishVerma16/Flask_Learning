@@ -1,5 +1,4 @@
 from datetime import datetime
-# from flask_blog_template import db
 from flaskblog import db
 
 
