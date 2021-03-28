@@ -63,3 +63,13 @@ Post('Blog 1', '2021-03-27 18:02:50.253993')
 User('ishver', 'ish@email.com', 'default.jpg')
 
 >>> db.drop_all()
+
+
+Commands after structure the code into package
+
+>>> from flaskblog import db
+>>> db.create_all()
+>>> from flaskblog.models import User, Post
+>>> User.query.all()
+[]  
+
