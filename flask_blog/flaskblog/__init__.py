@@ -1,6 +1,6 @@
-from flask import Flask, render_template, url_for, flash, redirect
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_blog.flaskblog.forms import RegistrationForm, LoginForm # folder_name.file_name -> flask_blog.forms
+from flaskblog.forms import RegistrationForm, LoginForm # folder_name.file_name -> flask_blog.forms
 # from models import User, Post
 
 app = Flask(__name__)
@@ -12,3 +12,5 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 
 
 db = SQLAlchemy(app)
+
+from flaskblog import routes
