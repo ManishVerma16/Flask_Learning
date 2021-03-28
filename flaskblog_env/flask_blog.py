@@ -1,3 +1,4 @@
+'''
 from flask import Flask
 
 app = Flask(__name__)
@@ -15,4 +16,6 @@ def about():
 
 if __name__ == '__main__':  # name = main if script is directly run by python
     app.run(debug=True)
-# if we import this module somewhere else then this name will be the name of module.
+# if we import this module somewhere else then
+
+'''
