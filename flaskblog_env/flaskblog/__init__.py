@@ -1,6 +1,5 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flaskblog.forms import RegistrationForm, LoginForm # folder_name.file_name -> flask_blog.forms
 from flask_bcrypt import Bcrypt
 
 app = Flask(__name__)
@@ -13,3 +12,4 @@ db = SQLAlchemy(app)
 
 bcrypt = Bcrypt(app)
 from flaskblog import routes
+from flaskblog.forms import RegistrationForm, LoginForm # folder_name.file_name -> flask_blog.forms
