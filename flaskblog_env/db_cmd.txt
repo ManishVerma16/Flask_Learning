@@ -1,0 +1,117 @@
+>>> from flask_blog.flask_blog_template import db
+>>> db.create_all()
+>>> from flask_blog.flask_blog_template import User, Post    
+>>> user_1 = User(username='ishver', email='ish@email.com', password='ishver123')
+>>> db.session.add(user_1)
+>>> user_2 = User(username='test', email='test@email.com', password='test123')
+>>> db.session.add(user_2) 
+>>> db.session.commit()   
+>>> User.query.all()
+[User('ishver', 'ish@email.com', 'default.jpg'), User('test', 'test@email.com', 'default.jpg')]
+>>> User.query.first()
+User('ishver', 'ish@email.com', 'default.jpg')
+>>> User.query.filter_by(username='ishver').all()
+[User('ishver', 'ish@email.com', 'default.jpg')]
+>>> User.query.filter_by(username='ishver').first()
+User('ishver', 'ish@email.com', 'default.jpg')
+>>> user = User.query.filter_by(username='ishver').first() 
+>>> user
+User('ishver', 'ish@email.com', 'default.jpg')
+>>> user.id
+1
+>>> user.username
+'ishver'
+>>> user.email   
+'ish@email.com'
+>>> user.password
+'ishver123'
+>>> user.image_file
+'default.jpg'
+>>> User.query.get(1) 
+User('ishver', 'ish@email.com', 'default.jpg')
+>>> User.query.get(2) 
+User('test', 'test@email.com', 'default.jpg')
+
+>>> user.id
+1
+>>> post_1 = Post(title='Blog 1', content='First Post Content!', user_id=user.id)
+>>> post_2 = Post(title='Blog 2', content='Second Post Content!', user_id=user.id)
+>>> db.session.add(post_1)
+>>> db.session.add(post_2) 
+>>> db.session.commit()
+>>> user.posts
+[Post('Blog 1', '2021-03-27 18:02:50.253993'), Post('Blog 2', '2021-03-27 18:02:50.255989')]
+
+>>> for post in user.posts:
+...     print(post.title)
+...     print(post.user_id)
+... 
+Blog 1
+1
+Blog 2
+1
+
+>>> post = Post.query.first()
+>>> post
+Post('Blog 1', '2021-03-27 18:02:50.253993')
+>>> post = Post.query.all()  
+>>> post
+[Post('Blog 1', '2021-03-27 18:02:50.253993'), Post('Blog 2', '2021-03-27 18:02:50.255989')]
+
+>>> post = Post.query.first()
+>>> post.author
+User('ishver', 'ish@email.com', 'default.jpg')
+
+>>> db.drop_all()
+
+
+Commands after structure the code into package
+
+>>> from flaskblog import db
+>>> db.create_all()
+>>> from flaskblog.models import User, Post
+>>> User.query.all()
+[]  
+
+
+Commands for encrypting password using flask's Bcrypt package
+
+>>> from flask_bcrypt import Bcrypt
+>>> bcrypt = Bcrypt()
+>>> bcrypt.generate_password_hash('testing')
+b'$2b$12$4jVpfD/sxzgSSm51LijvpesxejRRJD/PFozKGClIXF9uB1VasNwBy'   # b -> bytes
+
+we get different hashing values for the same passwords in utf-8 format -> strings
+
+>>> bcrypt.generate_password_hash('testing').decode('utf-8') 
+'$2b$12$IFxM1vy6R9JvDH5XWJZbB.Iggr5NnXC1r8WFL.aHl4MfeFpClfRgO'
+>>> bcrypt.generate_password_hash('testing').decode('utf-8')
+'$2b$12$IvOCxzfjRFOu/SwcKa.YYOrwHUep7RaOR5n90cbkbRu52.8hB8rtC'
+
+
+verify the encrypted password with same and different passwords
+
+>>> hashed_pw = bcrypt.generate_password_hash('testing').decode('utf-8')
+>>> bcrypt.check_password_hash(hashed_pw, 'password')        
+False      
+>>> bcrypt.check_password_hash(hashed_pw, 'testing')  
+True
+>>> 
+
+Commands after setting authentication on registration in route file
+
+>>> from flaskblog import db
+C:\Users\ManishVerma\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_sqlalchemy\__init__.py:872: FSADeprecationWarning: SQLALCHEMY_TRACK_MODIFICATIONS adds significant 
+overhead and will be disabled by default in the future.  Set 
+it to True or False to suppress this warning.
+  warnings.warn(FSADeprecationWarning(
+
+>>> from flaskblog.models import User
+>>> user_1 = User.query.first()
+
+>>> user_1 = User.query.first()
+>>> user_1                            
+User('ishver', 'ishver@email.com', 'default.jpg')
+>>> user_1.password
+'$2b$12$jZF82lMXyvvQw103NTBI1.dBKbi2IEvsu4U6Y8xBRkiAKHgIU.Z7i'
+>>>
