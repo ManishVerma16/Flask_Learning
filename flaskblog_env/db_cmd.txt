@@ -115,3 +115,23 @@ User('ishver', 'ishver@email.com', 'default.jpg')
 >>> user_1.password
 '$2b$12$jZF82lMXyvvQw103NTBI1.dBKbi2IEvsu4U6Y8xBRkiAKHgIU.Z7i'
 >>>
+
+
+>>> from flaskblog.models import Post 
+>>> posts = Post.query.all()
+>>> for post in posts:
+...   print(post)
+
+>>> posts = Post.query.paginate()
+>>> dir(posts)
+['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', 
+'__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'has_next', 'has_prev', 'items', 'iter_pages', 'next', 'next_num', 'page', 'pages', 'per_page', 'prev', 'prev_num', 'query', 'total']
+
+>>> posts.page  // current page
+1
+>>> posts.per_page // content par page
+20
+
+>>> for post in posts.items:
+...     print(post)
+... 
