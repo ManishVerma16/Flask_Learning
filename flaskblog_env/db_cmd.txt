@@ -135,3 +135,32 @@ User('ishver', 'ishver@email.com', 'default.jpg')
 >>> for post in posts.items:
 ...     print(post)
 ... 
+
+
+>>> posts = Post.query.paginate(per_page=5)
+>>> posts.page
+1
+>>> for post in posts.items:
+...     print(post)
+... 
+Post('My First Blog', '2021-04-09 18:59:54.667415')
+Post('New Updated Post', '2021-04-10 03:06:18.377428')
+Post('My Updated Post', '2021-04-10 17:33:17.546314')
+Post('Top 5 Programming Lanaguages', '2021-04-10 17:33:58.329581')
+Post('A Second Post', '2021-04-10 17:35:08.786654')
+>>>
+>>> posts = Post.query.paginate(per_page=5, page=2) 
+>>> posts.page
+2
+>>> for post in posts.items:
+...     print(post)
+...                                                 
+Post('Sublime Text Tips and Tricks', '2021-04-10 17:36:17.257376')
+Post('Best Python IDEs', '2021-04-10 17:36:46.647218')
+Post('Flask vs Django - Which Is Better?', '2021-04-10 17:39:46.321870')
+Post('You Won't Believe These Clickbait Titles!', '2021-04-10 17:40:56.287763')
+Post('These Beers Will Improve Your Programming', '2021-04-10 17:41:43.171836')
+>>>
+
+>>> posts.total
+10
