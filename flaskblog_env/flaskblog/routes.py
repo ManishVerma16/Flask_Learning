@@ -28,7 +28,7 @@ posts = [
 def home():
     # posts = Post.query.all()
     page = request.args.get('page', 1, type=int)
-    posts = Post.query.paginate(per_page=5, page=page) # applying pagination to show only limited post on home page
+    posts = Post.query.order_by(Post.date_posted.desc()).paginate(per_page=5, page=page) # applying pagination to show only limited post on home page
     return render_template('home.html', posts=posts)  # return the home.html using rendered template object
 
 
@@ -156,3 +156,9 @@ def delete_post(post_id):
     return redirect(url_for('home'))
 
 
+@app.route('/user/<string:username>') 
+def user_post(username):
+    page = request.args.get('page', 1, type=int)
+    user = User.query.filter_by(username=username).first_or_404()
+    posts = Post.query.filter_by(author=user).order_by(Post.date_posted.desc()).paginate(per_page=5, page=page) # applying pagination to show only limited post on home page
+    return render_template('user_posts.html', posts=posts, user=user)
