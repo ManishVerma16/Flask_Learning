@@ -164,3 +164,14 @@ Post('These Beers Will Improve Your Programming', '2021-04-10 17:41:43.171836')
 
 >>> posts.total
 10
+
+# library import to generate time-sensitive token for logins 
+>>> from itsdangerous import TimedJSONWebSignatureSerializer as 
+Serializer  
+>>> s = Serializer('secret', 30)
+>>> token = s.dumps({'user_id': 1}).decode('utf-8') 
+>>> token
+'eyJhbGciOiJIUzUxMiIsImlhdCI6MTYxODIyNTEyMiwiZXhwIjoxNjE4MjI1MTUyfQ.eyJ1c2VyX2lkIjoxfQ.VSFOHEnYp1qMYVNV2r3QfH3LuUoWpUqlveqnUNuSu0RHtwxi_QCIg0Pb_RuIP9GUd4m-SOycfJqKeQyULs6iRQ'
+>>> s.loads(token)
+{'user_id': 1}
+>>>
