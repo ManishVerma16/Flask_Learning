@@ -1,3 +1,9 @@
+import secrets, os
+from PIL import Image
+from flask import url_for
+from flask_mail import Message
+from flaskblog import app, mail
+
 def save_picture(form_picture):
     random_hex = secrets.token_hex(8)  # generate hex token of 8 bytes
     _, f_ext = os.path.splitext(form_picture.filename)  # split filename and extension. Dropping filename using '_'
